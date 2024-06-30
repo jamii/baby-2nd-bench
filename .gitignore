@@ -3,3 +3,6 @@ big.zig
 *.cwasm
 *.wasm
 tokenize-main
+zig-cache/
+target/
+*.wat
