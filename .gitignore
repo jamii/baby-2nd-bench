@@ -1,0 +1,5 @@
+big.zig
+*.o
+*.cwasm
+*.wasm
+tokenize-main
