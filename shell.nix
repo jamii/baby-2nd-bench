@@ -30,6 +30,7 @@ pkgs.mkShell rec {
         pkgs.wabt
         pkgs.deno
         pkgs.wasmtime
+        pkgs.cargo
     ];
     buildInputs = [
     ];
