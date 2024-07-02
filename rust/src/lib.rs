@@ -5,7 +5,7 @@
 #[inline(never)]
 pub fn square_n_times(m: &mut [[i32; 2]; 2], n: u32) {
     for _ in 0..n {
-        let squared = [
+        *m = [
             [
                 m[0][0] * m[0][0] + m[0][1] * m[1][0],
                 m[0][0] * m[0][1] + m[0][1] * m[1][1],
@@ -15,6 +15,5 @@ pub fn square_n_times(m: &mut [[i32; 2]; 2], n: u32) {
                 m[1][0] * m[0][1] + m[1][1] * m[1][1],
             ],
         ];
-        *m = squared;
     }
 }
