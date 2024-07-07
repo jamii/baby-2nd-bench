@@ -1,5 +1,5 @@
 const std = @import("std");
-const allocator = std.heap.wasm_allocator;
+const allocator = std.heap.page_allocator;
 
 export fn alloc(len: usize) [*c]u8 {
     return allocator.allocSentinel(u8, len, 0) catch std.debug.panic("oom", .{});

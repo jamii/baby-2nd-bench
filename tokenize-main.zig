@@ -1,6 +1,5 @@
 const std = @import("std");
-var gpa = std.heap.GeneralPurposeAllocator(.{}){};
-const allocator = gpa.allocator();
+const allocator = std.heap.page_allocator;
 
 pub fn main() !void {
     const cwd = std.fs.cwd();
@@ -8,8 +7,12 @@ pub fn main() !void {
     const file = try cwd.openFile("big.zig", .{ .mode = .read_write });
     defer file.close();
 
-    const source = try file.readToEndAllocOptions(allocator, std.math.maxInt(usize), null, 1, 0);
+    const len_expected = @as(usize, @intCast((try file.stat()).size));
+    const source = allocator.allocSentinel(u8, len_expected, 0) catch unreachable;
     defer allocator.free(source);
+
+    const len_actual = try file.readAll(source);
+    std.debug.assert(len_actual == len_expected);
 
     var count: usize = 0;
     var tokenizer = std.zig.Tokenizer.init(source);
