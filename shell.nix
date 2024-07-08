@@ -31,6 +31,7 @@ pkgs.mkShell rec {
         pkgs.deno
         pkgs.wasmtime
         pkgs.cargo
+        pkgs.hyperfine
     ];
     buildInputs = [
     ];
